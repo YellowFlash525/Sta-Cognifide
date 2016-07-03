@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ZadanieStaż</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+</head>    
+<body>
+    <div class="header">Kamil Wójcik</div>
+    <!-- container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            <!-- Navbar -->
+                <nav class="navbar myNavbar" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">MENU</a>
+                        </div>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Strona Głowna</a></li>
+                            <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                            <li><a href="https://www.cognifide.com/">Cognifide</a></li>
+                            <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+                            <li><a href="#">Informacja</a></li>
+                            <li><a href="#">O mnie</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            <!-- End Navbar -->
+            </div>   
+                <div class="col-md-9">
+                    <div class="box"> <!-- First Box -->
+                        <div class="col-lg-12">
+                        <h3 id="myForm" class="text-center">Formularz
+                        </h3>
+                        <hr>
+                        <p>Napisz coś...</p>
+                        <input id="textBox1" class="textbox" type"text" placeholder="Wpisz zdanie">
+                        <div id="buttonInverse" type="button" class="button btn-default">Odwróć</div>
+                        </div>
+                    </div> <!-- End First Box -->
+                    <div class="box"> <!-- Second Box -->
+                        <div class="col-lg-12">
+                            <h3 class="text-center">Wynik
+                            </h3>
+                            <hr>
+                            <p>Odwrócony tekst:</p>
+                            <p id="textInverse"></p>
+                        </div>
+                    </div><!-- End Second Box -->
+                    <div class="box"> <!-- Third Box -->
+                        <div class="col-lg-12">
+                            <h3 class="text-center">Lista
+                            </h3>
+                            <hr>
+                            <ul id="list">
+                                <li>Maria</li>
+                                <li>Łukasz</li>
+                                <li>Kamil</li>
+                                <li>Anna</li>
+                            </ul>
+                            <div id="sortButton" type="button" class="button btn-default">Sortuj</div>
+                        </div>
+                    </div><!-- End Third Box -->
+                </div>
+           </div>
+      </div>
+      <!-- ./container -->
+      <footer>
+        <!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>My Webpage 2016</p>
+                </div>
+            </div>
+        </div>
+        <!-- ./container -->
+      </footer>
+    <!-- JS Script -->
+    <script type="text/javascript">
+        <!-- InverseString -->
+        document.getElementById("buttonInverse").addEventListener("click", function() {
+            var inputText = document.getElementById("textBox1").value;
+            if(inputText.length <= 0){
+                alert("Nic nie wpisałeś");
+            }
+            else{
+                var makeToken = inputText.split(" ");
+                var text = "";
+                for (var i = 0; i < makeToken.length; i++) {
+                    var x = makeToken[i].split("").reverse();
+                    text += x.join("") + " ";
+                }
+                document.getElementById("textInverse").innerHTML = text;
+            }            
+        });
+        
+        <!-- ChangeTextButton -->
+        document.getElementById("myForm").addEventListener("mouseover", function(){
+            document.getElementById("buttonInverse").innerHTML = "Animuje się";
+        });
+        
+        document.getElementById("myForm").addEventListener("mouseout",function(){
+            document.getElementById("buttonInverse").innerHTML = "Odwróć";
+        });
+        
+        <!-- Sort Script -->
+        document.getElementById("sortButton").addEventListener("click", function(){
+            function MySort(alphabet)
+            {
+                return function(a, b) {
+                    var index_a = alphabet.indexOf(a[0]),
+                    index_b = alphabet.indexOf(b[0]);
+
+                    if (index_a == index_b) {
+                        if (a < b) {
+                            return -1;
+                        } else if (a > b) {
+                            return 1;
+                        }
+                        return 0;
+                    } else {
+                        return index_a - index_b;
+                    }
+                }
+            }
+            var ulTag = document.getElementById("list");
+            var liTag = ulTag.getElementsByTagName("li");
+            var sorter = MySort('*!@_.()#^&%-=+01234567989AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż');
+            var a = [];
+            for (var i = 0; i < liTag.length; i++) {
+                a[i] = liTag[i].innerHTML;
+            }
+            a.sort(sorter);
+            for (var i = 0; i < liTag.length; i++) {
+                liTag[i].innerHTML = a[i];
+            }
+        });
+    </script>
+</body> 
+</html>
